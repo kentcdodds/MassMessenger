@@ -1,3 +1,5 @@
 This is a simple application which can send customized bulk messages via e-mail and SMS.
 It takes a properties file on the command line which contains a few properties (username/password for Google Account, must have Google Voice for the SMS to work, etc.) along with a path to a csv file where the destination, message, and subject (for e-mails) is located (must contain at least 3 columns and be in that order).
 This makes it possible for you to leverage Excel to generate the messages to make them personal, and send virtually an unlimited amount at a time. Almost like mail merge :D
+
+If you just want to use it, go to /store/MassMessenger.jar and download that, then just run it on the command line, it will output what you need to do next.

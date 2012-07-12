@@ -45,8 +45,8 @@ public class Controller {
               "csv_location*",
               "descramble_pass (optional, true/false, Descramble the password using the Java Helper Library Descrabler)",
               "hide_pass (optional, true/false, hide the password on failure to login.",
-              "\t*Can be on disk or a URL to a csv file online. This file must have at least 3 columns: 1 - phone number/email address; 2 - message; 3 - subject (will be ignored if not an e-mail)"));
-      return;
+              "\t*Can be on disk or a URL to a csv file online. This file must have at least 3 columns: 1 - phone number/email address; 2 - message; 3 - subject (will be ignored if not an e-mail, if no third column)"));
+      System.exit(0);
     }
     Properties props = new Properties();
     try {
@@ -110,7 +110,7 @@ public class Controller {
     try {
       String[] row;
       while ((row = reader.readNext()) != null) {
-        recipients.add(new Recipient(row[0], row[1].replace("\n", StringHelper.newline), row[2]));
+        recipients.add(new Recipient(row[0], row[1].replace("\n", StringHelper.newline), (row.length > 2 || row[2] == null) ? row[2] : "no subject"));
       }
     } catch (IOException ex) {
       Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
@@ -175,7 +175,7 @@ public class Controller {
     } catch (IOException ex) {
       Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
     }
-    System.exit(1);
+    System.exit(0);
   }
 
   /**
